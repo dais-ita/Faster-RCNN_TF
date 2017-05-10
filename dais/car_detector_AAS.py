@@ -26,7 +26,7 @@ def predict():
 
 if __name__ == "__main__":
     print('Loading the model')
-    model_path = "./VGGnet_fast_rcnn_iter_70000.ckpt"
+    model_path = os.path.join("..","rcnn-models","VGGnet_fast_rcnn_iter_70000.ckpt")
     dais_detctor = DaisDetector(model_path)
     print('Starting the API')
     app.run()
