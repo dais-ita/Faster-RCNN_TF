@@ -5,6 +5,8 @@ import tensorflow as tf
 from flask import Flask, request
 from flask_cors import CORS
 
+import matplotlib
+
 from dais_detector import DaisDetector
 import os
 
@@ -25,6 +27,8 @@ def predict():
     return json_data
 
 if __name__ == "__main__":
+    print("matplotlib check:")
+    print(matplotlib.matplotlib_fname())
     print('Loading the model')
     model_path = os.path.join("..","rcnn-models","VGGnet_fast_rcnn_iter_70000.ckpt")
     dais_detctor = DaisDetector(model_path)
