@@ -37,6 +37,13 @@ class DaisDetector(object):
 
     def detect(self, im_file):
         im = cv2.imread(im_file)
+        cv2.imshow('image',im)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+
+        return self.DetectInImage(im)
+
+    def DetectInImage(self, im):
         scores, boxes = im_detect(self.sess, self.net, im)
         print ('Detection . # {:d} object proposals'.format(boxes.shape[0]))
         CONF_THRESH = 0.8
@@ -52,7 +59,7 @@ class DaisDetector(object):
             dets = dets[keep, :]
             inds = np.where(dets[:, -1] >= CONF_THRESH)[0]
             if len(inds) == 0:
-            	pass
+                pass
             class_result = []
             for i in inds:
                 bbox = dets[i, :4]
