@@ -1,6 +1,6 @@
 TF_INC=$(python -c 'import tensorflow as tf; print(tf.sysconfig.get_include())')
 
-CUDA_PATH=/usr/local/cuda/
+CUDA_PATH=/usr/local/cuda
 CXXFLAGS=''
 
 if [[ "$OSTYPE" =~ ^darwin ]]; then
@@ -14,7 +14,7 @@ if [ -d "$CUDA_PATH" ]; then
 		-I $TF_INC -D GOOGLE_CUDA=1 -x cu -Xcompiler -fPIC $CXXFLAGS \
 		-arch=sm_37
 
-	g++ -std=c++11 -shared -o roi_pooling.so roi_pooling_op.cc \
+	g++ -std=c++11 -shared -D_GLIBCXX_USE_CXX11_ABI=0 -o roi_pooling.so roi_pooling_op.cc \
 		roi_pooling_op.cu.o -I $TF_INC  -D GOOGLE_CUDA=1 -fPIC $CXXFLAGS \
 		-lcudart -L $CUDA_PATH/lib64
 else
