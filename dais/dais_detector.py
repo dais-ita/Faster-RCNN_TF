@@ -23,9 +23,9 @@ CLASSES = ('__background__',
 
 
 class DaisDetector(object):
-    def __init__(self, model_path):
+    def __init__(self, model_path,device_id=1):
         self.model_path = model_path
-        self.sess = tf.Session(config=tf.ConfigProto(allow_soft_placement=True))
+        self.sess = tf.Session(config=tf.ConfigProto(allow_soft_placement=True,device_count = {'GPU': device_id}))
         self.net = get_network('VGGnet_test')
         self.saver = tf.train.Saver(write_version=tf.train.SaverDef.V1)
         self.saver.restore(self.sess, self.model_path)

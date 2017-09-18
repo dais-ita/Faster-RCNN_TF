@@ -142,6 +142,6 @@ if __name__ == "__main__":
     print(matplotlib.matplotlib_fname())
     print('Loading the model')
     model_path = os.path.join("..","rcnn-models","VGGnet_fast_rcnn_iter_70000.ckpt")
-    dais_detctor = DaisDetector(model_path)
+    dais_detctor = DaisDetector(model_path,1)
     print('Starting the API')
     app.run(host='0.0.0.0', port=5010)
